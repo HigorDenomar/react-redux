@@ -1,16 +1,8 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
-function reducer() {
-  return {
-    repositories: [
-      { id: 1, name: 'react' },
-      { id: 2, name: 'react-native' },
-      { id: 3, name: 'node-js' },
-      { id: 4, name: 'redux' },
-    ],
-  }
-}
+import rootReducer from './reducers';
 
-const store = createStore(reducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;

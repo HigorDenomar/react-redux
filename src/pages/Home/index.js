@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { getRepositories } from '../../store/reducers/repositories';
 
-function Home({ repos }) {
-  console.log(repos);
+function Home({ repos, dispatch }) {
+
+  useEffect(() => {
+    dispatch(getRepositories);
+  }, []);
 
   return (
     <>
@@ -11,7 +16,7 @@ function Home({ repos }) {
 
       <main>
         <ul className="reposWrapper">
-        { repos?.map(repo => (
+        { repos.map(repo => (
           <li key={repo.id}>{ repo.name }</li>
         )) }
         </ul>
