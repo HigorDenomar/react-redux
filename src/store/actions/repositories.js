@@ -4,3 +4,10 @@ export function setRepos(repos) {
     repos,
   }
 }
+
+export function setSelectedRepo(repo) {
+  return {
+    type: 'SET_SELECTED_REPO',
+    repo
+  }
+}

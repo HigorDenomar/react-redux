@@ -1,28 +1,22 @@
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { getRepositories } from '../../store/reducers/repositories';
+import ListRepositories from '../../components/ListRepositories';
+import SelectedRepository from '../../components/SelectedRepository';
 
-function Home({ repos, dispatch }) {
+import styles from './styles.module.scss';
 
-  useEffect(() => {
-    dispatch(getRepositories);
-  }, []);
+export default function Home() {
 
   return (
     <>
-      <header>
-        Redux
+      <header className={styles.header}>
+        <strong>Redux</strong>
       </header>
 
-      <main>
-        <ul className="reposWrapper">
-        { repos.map(repo => (
-          <li key={repo.id}>{ repo.name }</li>
-        )) }
-        </ul>
+      <main className={styles.container}>
+        <ListRepositories />
+
+        <SelectedRepository />
       </main>
     </>
   );
 }
 
-export default connect(state => ({ repos: state.repositories }))(Home);

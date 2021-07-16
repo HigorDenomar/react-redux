@@ -1,0 +1,26 @@
+.reposWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  list-style: none;
+  padding: 1rem;
+  overflow-y: auto;
+  
+  li {
+    background: #eee;
+    padding: 1rem;
+    border-radius: 4px;
+    transition: background 0.3s;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    & + li {
+      margin-top: 0.5rem;
+    }
+
+    &:hover {
+      background: tomato;
+      color: white;
+    }
+  }
+}

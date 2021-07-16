@@ -1,17 +1,30 @@
 import { setRepos } from '../actions/repositories';
 
-export default function repositories(state = [], action) {
-  if(action.type === 'SET_REPOS') {
-    return [...state, ...action.repos];
-  }
-
-  return state;
+const INITIAL_STATE = {
+  selected: {},
+  list: []
 }
 
-export async function getRepositories(dispatch) {
-  const repos = await fetch('https://api.github.com/users/higordenomar/repos')
-    .then(response => response.json())
-    .then(data => data);
+export default function repositories(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'SET_REPOS':
+      return {...state, list: [...state.list, ...action.repos]};
+      
+    case 'SET_SELECTED_REPO':
+      return { ...state, selected: action.repo };
 
-  dispatch(setRepos(repos));
+    default:
+      return state;
+  }
+}
+
+export function getRepositories(username) {
+
+  return async (dispatch) => {
+    const repos = await fetch(`https://api.github.com/users/${username}/repos`)
+      .then(response => response.json())
+      .then(data => data);
+  
+    dispatch(setRepos(repos));
+  }
 }
