@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedRepo } from '../../store/actions/repositories';
 
 import { getRepositories } from '../../store/reducers/repositories';
 
 import styles from './styles.module.scss';
 
-function ListRepositories({ repos, dispatch }) {
+export default function ListRepositories() {
+  const dispatch = useDispatch();
+  const repos = useSelector(state => state.repositories.list)
+
   useEffect(() => {
     const username = "HigorDenomar";
 
@@ -27,5 +30,3 @@ function ListRepositories({ repos, dispatch }) {
     </ul>
   );
 }
-
-export default connect(state => ({ repos: state.repositories.list }))(ListRepositories);

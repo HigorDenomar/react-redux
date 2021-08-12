@@ -1,7 +1,9 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 
-function SelectedRepository({ repository }) {
+export default function SelectedRepository() {
+  const repository = useSelector(state => state.repositories.selected);
+
   if(!repository?.name) {
     return (
       <div className={styles.container}>
@@ -26,5 +28,3 @@ function SelectedRepository({ repository }) {
     </div>
   );
 }
-
-export default connect(state => ({ repository: state.repositories.selected }))(SelectedRepository);
